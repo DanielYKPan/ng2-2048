@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { TileService, Tile, traversalDirections, checkSameCoordination } from "./tile";
+import { GridService, Tile, traversalDirections, checkSameCoordination } from "./tile";
 
 export interface IGameStatus {
     scores: number;
@@ -20,12 +20,13 @@ export class GameService {
         return this.gameStatus
     }
 
-    constructor( private tileService: TileService ) {
+    constructor( private gridService: GridService ) {
     }
 
     newGame() {
-        this.tileService.buildGrid();
-        this.tileService.buildStartingPosition();
+        this.resetGameStatus();
+        this.gridService.buildGrid();
+        this.gridService.buildStartingPosition();
     }
 
     move( direction: string ) {
@@ -38,7 +39,7 @@ export class GameService {
 
         let hasMoved = false; // set a flag to see if any tiles moved
         let scores = 0; // a variable to hold the scores of this move
-        this.tileService.prepareMove();
+        this.gridService.prepareMove();
 
         // We get the grid checking order based on the move direction
         let positions = traversalDirections(direction);
@@ -46,10 +47,10 @@ export class GameService {
         positions.x.forEach(( x ) => {
             positions.y.forEach(( y ) => {
                 let originalPosition = {x: x, y: y},
-                    tile = this.tileService.getTileAt(originalPosition);
+                    tile = this.gridService.getTileAt(originalPosition);
 
                 if (tile) {
-                    let cell = this.tileService.calculateNextPosition(originalPosition, direction);
+                    let cell = this.gridService.calculateNextPosition(originalPosition, direction);
                     let next: Tile = cell.next;
 
                     // If a tile's next tile exists and the next tile has not been merged yet and it has the same value
@@ -64,7 +65,7 @@ export class GameService {
                                             // so that we know it could not merge any more in the next check
 
                         // Move the tile to the new coordination, so that we could see the moving animations
-                        this.tileService.moveTile(next.coordination, tile, next);
+                        this.gridService.moveTile(next.coordination, tile, next);
 
                         scores += next.value; // Add the new value to scoring table
 
@@ -72,8 +73,8 @@ export class GameService {
                     } else {
                         // It a tile's next tile not exists,
                         // that means the new coordination is empty and we could move the tile to the new place
-                        this.tileService.moveTile(cell.newPosition, tile);
-                        this.tileService.saveTileIdIntoGrid(tile, cell.newPosition);
+                        this.gridService.moveTile(cell.newPosition, tile);
+                        this.gridService.saveTileIdIntoGrid(tile, cell.newPosition);
                     }
 
                     if (!hasMoved && !checkSameCoordination(originalPosition, cell.newPosition)) {
@@ -89,7 +90,7 @@ export class GameService {
         // If any tile's move to a new place,
         // that means we at least make a proper move and we randomly add a new tile into the grid
         if (hasMoved) {
-            this.tileService.randomlyInsertTile();
+            this.gridService.randomlyInsertTile();
 
             // After we insert a new tile,
             // we need to check if there is any empty cell or any merge-able tiles.
@@ -103,6 +104,14 @@ export class GameService {
     }
 
     private moveAvailable(): boolean {
-        return this.tileService.anyCellInGridAvailable() || this.tileService.tileMatchesAvailable();
+        return this.gridService.anyCellInGridAvailable() || this.gridService.tileMatchesAvailable();
+    }
+
+    private resetGameStatus(): void {
+        this.gameStatus = {
+            scores: 0,
+            gameOver: false,
+            gameWon: false
+        }
     }
 }

@@ -5,7 +5,7 @@
 import { ActionReducer } from "@ngrx/store";
 import { BUILD_GRID, ADD_ID, REMOVE_ID } from "../actions.const";
 
-export const grid: ActionReducer<string[]> = ( state: string[] = [], action: any ) => {
+export const gridReducer: ActionReducer<string[]> = ( state: string[] = [], action: any ) => {
     switch (action.type) {
         case BUILD_GRID:
             let size = action.payload;

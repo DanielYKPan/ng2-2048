@@ -20,7 +20,7 @@ const Vectors = {
 };
 
 @Injectable()
-export class TileService {
+export class GridService {
 
     /*
      * A array to hold all the tiles' Id in their specific index place

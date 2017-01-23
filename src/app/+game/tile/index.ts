@@ -3,7 +3,7 @@
  */
 
 export { Tile } from './tile';
-export { tiles } from './tiles.reducer';
-export { grid } from './grid.reducer';
-export { TileService, traversalDirections, checkSameCoordination } from './tile.service';
+export { tilesReducer } from './tiles.reducer';
+export { gridReducer } from './grid.reducer';
+export { GridService, traversalDirections, checkSameCoordination } from './tile.service';
 export { GameTileComponent } from './game-tile.component';
