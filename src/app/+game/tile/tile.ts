@@ -26,9 +26,9 @@ export class Tile {
     public shouldDump: boolean;
 
 
-    constructor( coordination: Coordination, value?: number ) {
+    constructor( coordination?: Coordination, value?: number ) {
         this.id = uuid();
-        this.coordination = coordination;
+        this.coordination = coordination || null;
         this.value = value || 2;
         this.merged = false;
         this.shouldDump = false;

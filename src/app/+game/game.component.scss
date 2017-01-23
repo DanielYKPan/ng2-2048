@@ -1,0 +1,87 @@
+$board-width: 35rem;
+$board-padding: 2rem;
+$tile-radius: 10px;
+$tile-count: 4;
+$tile-padding: 1rem;
+$tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padding)/$tile-count;
+
+.game-wrapper {
+  display: flex;
+  justify-content: space-around;
+  color: #776E65;
+
+  .game-control {
+    width: 20%;
+  }
+
+  .game-panel {
+    width: 75%;
+  }
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #faf8ef;
+  z-index: -99999;
+}
+
+.board {
+  position: relative;
+  width: $board-width;
+  height: $board-width;
+  margin: 40px auto;
+}
+
+.game-board {
+  border-radius: .5em;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+.game-4-board {
+  position: relative;
+  background: #bbaaa0;
+  padding: $board-padding;
+  z-index: 5;
+}
+
+.game-over-board {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.grid-board {
+  z-index: 1;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+
+  .grid-tile {
+    width: $tile-width;
+    height: $tile-width;
+    background: rgba(238, 228, 218, 0.35);
+    border-radius: $tile-radius;
+  }
+}
+
+.tile-board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  padding: $board-padding;
+  z-index: 2;
+}

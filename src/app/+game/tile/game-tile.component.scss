@@ -1,0 +1,83 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/functions';
+@import '../../../styles/utils/mixins';
+
+$tile-count: 4;
+$board-width: 35rem;
+$tile-padding: 1rem;
+$tile-radius: 10px;
+$board-padding: 2rem;
+
+$tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padding)/$tile-count;
+
+$colors:  #EEE4DA, // 2
+#EAE0C8, // 4
+#F59563, // 8
+#3399ff, // 16
+#ffa333, // 32
+#cef030, // 64
+#E8D8CE, // 128
+#990303, // 256
+#6BA5DE, // 512
+#DCAD60, // 1024
+#B60022; // 2048
+
+@function power ($x, $n) {
+  $ret: 1;
+
+  @if $n >= 0 {
+    @for $i from 1 through $n {
+      $ret: $ret * $x;
+    }
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret / $x;
+    }
+  }
+
+  @return $ret;
+}
+
+.tile {
+  position: absolute;
+  width: $tile-width;
+  height: $tile-width;
+  border-radius: $tile-radius;
+  z-index: 10;
+  transition: transform 100ms ease-in-out;
+
+
+  @for $x from 1 through $tile-count{
+    @for $y from 1 through $tile-count{
+      $zeroOffsetX: $x - 1;
+      $zeroOffsetY: $y - 1;
+      $newX : ($tile-width * $zeroOffsetX) + ($tile-padding * $zeroOffsetX);
+      $newY : ($tile-width * $zeroOffsetY) + ($tile-padding * $zeroOffsetY);
+
+      &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
+        transform: translate($newX, $newY);
+      }
+    }
+  }
+
+  @for $x from 1 through length($colors) {
+    &.tile-#{power(2, $x)} .tile-inner{
+      background: nth($colors, $x);
+    }
+  }
+
+  &.is-merged {
+    z-index: 20;
+  }
+
+  .tile-inner {
+    @include type-setting(4);
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: $base-line-height 0;
+    font-weight: bold;
+    border-radius: $tile-radius;
+  }
+}
