@@ -6,7 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Tile } from "./tile/tile";
 import { Subscription } from "rxjs";
-import { GameService } from "./game.service";
+import { GameService, IGameStatus } from "./game.service";
 import { KeyboardService } from "./keyboard.service";
 
 @Component({
@@ -18,6 +18,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     tiles: Tile[];
     grid: string[];
+    gameStatus: IGameStatus;
 
     private selectTilesSub: Subscription;
     private selectIDGridSub: Subscription;
@@ -61,6 +62,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     newGame(): void {
         this.gameService.newGame();
+        this.gameStatus = this.gameService.GameStatus;
     }
 
     clickKeyBoard( keyCode: number ): void {

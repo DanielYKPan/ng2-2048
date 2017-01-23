@@ -12,12 +12,14 @@ import { StoreModule } from "@ngrx/store";
 import { GridService, GameTileComponent, tilesReducer, gridReducer } from "./tile";
 import { GameService } from "./game.service";
 import { KeyboardService } from "./keyboard.service";
+import { GameOverBoardComponent } from "./game-over-board";
 
 @NgModule({
     declarations: [
         // Components / Directives/ Pipes
         GameComponent,
-        GameTileComponent
+        GameTileComponent,
+        GameOverBoardComponent,
     ],
     imports: [
         CommonModule,

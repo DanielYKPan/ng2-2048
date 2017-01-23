@@ -2,7 +2,7 @@
     <div class="background-image"></div>
     <section class="game-panel">
         <div class="board" (window:keydown)="clickKeyBoard($event.keyCode)">
-            <div class="game-board game-board game-4-board">
+            <div class="game-board game-4-board">
                 <div class="grid-board">
                     <div class="grid-tile" *ngFor="let item of grid;">
                     </div>
@@ -11,6 +11,9 @@
                     <app-game-tile *ngFor="let tile of tiles; trackBy: trackByFn"
                                    [tile]="tile"></app-game-tile>
                 </div>
+            </div>
+            <div class="game-board game-over-board" *ngIf="gameStatus.gameOver">
+                <game-over-board (restartBtnClick)="newGame()"></game-over-board>
             </div>
         </div>
     </section>
