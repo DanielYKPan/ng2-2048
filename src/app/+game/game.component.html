@@ -1,14 +1,14 @@
 <div class="game-wrapper">
     <div class="background-image"></div>
     <section class="game-panel">
-        <div class="board">
+        <div class="board" (window:keydown)="clickKeyBoard($event.keyCode)">
             <div class="game-board game-board game-4-board">
                 <div class="grid-board">
-                    <div class="grid-tile" *ngFor="let item of grid; let i = index; trackBy: i">
+                    <div class="grid-tile" *ngFor="let item of grid;">
                     </div>
                 </div>
                 <div class="tile-board">
-                    <app-game-tile *ngFor="let tile of tiles; let i = index; trackBy: tile?.Id"
+                    <app-game-tile *ngFor="let tile of tiles; trackBy: trackByFn"
                                    [tile]="tile"></app-game-tile>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { GameComponent } from "./game.component";
 import { StoreModule } from "@ngrx/store";
 import { TileService, GameTileComponent, tiles, grid } from "./tile";
 import { GameService } from "./game.service";
+import { KeyboardService } from "./keyboard.service";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { GameService } from "./game.service";
     ],
     providers: [
         GameService,
-        TileService
+        TileService,
+        KeyboardService,
     ]
 })
 export class GameModule {

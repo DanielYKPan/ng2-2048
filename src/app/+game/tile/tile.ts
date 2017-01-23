@@ -4,7 +4,6 @@
 
 import { uuid } from "../uuid";
 
-
 export interface Coordination {
     x: number;
     y: number;
@@ -34,6 +33,7 @@ export class Tile {
         this.shouldDump = false;
     }
 
+    // Backup the position so that we could do a undo
     backupPosition() {
         this.originalCoordi = this.coordination;
     }

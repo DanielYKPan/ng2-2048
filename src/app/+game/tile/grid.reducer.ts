@@ -3,7 +3,7 @@
  */
 
 import { ActionReducer } from "@ngrx/store";
-import { BUILD_GRID, ADD_ID } from "../actions.const";
+import { BUILD_GRID, ADD_ID, REMOVE_ID } from "../actions.const";
 
 export const grid: ActionReducer<string[]> = ( state: string[] = [], action: any ) => {
     switch (action.type) {
@@ -19,6 +19,15 @@ export const grid: ActionReducer<string[]> = ( state: string[] = [], action: any
             return state.map(( value, index ) => {
                 if (index == action.payload.index) {
                     return action.payload.value
+                } else {
+                    return value;
+                }
+            });
+
+        case REMOVE_ID:
+            return state.map(( value, index ) => {
+                if (index == action.payload.index) {
+                    return null
                 } else {
                     return value;
                 }

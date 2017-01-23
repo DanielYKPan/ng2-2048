@@ -7,6 +7,7 @@ import { Store } from "@ngrx/store";
 import { Tile } from "./tile/tile";
 import { Subscription } from "rxjs";
 import { GameService } from "./game.service";
+import { KeyboardService } from "./keyboard.service";
 
 @Component({
     selector: 'app-game',
@@ -20,8 +21,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     private selectTilesSub: Subscription;
     private selectIDGridSub: Subscription;
+    private arrowsSub: Subscription;
 
     constructor( private store: Store<any>,
+                 private keyboardService: KeyboardService,
                  private gameService: GameService ) {
     }
 
@@ -38,6 +41,10 @@ export class GameComponent implements OnInit, OnDestroy {
             }
         );
 
+        this.arrowsSub = this.keyboardService.arrows.subscribe(
+            data => this.gameService.move(data)
+        );
+
         this.newGame();
     }
 
@@ -47,9 +54,20 @@ export class GameComponent implements OnInit, OnDestroy {
 
         if (this.selectIDGridSub)
             this.selectIDGridSub.unsubscribe();
+
+        if (this.arrowsSub)
+            this.arrowsSub.unsubscribe();
     }
 
     newGame(): void {
         this.gameService.newGame();
+    }
+
+    clickKeyBoard( keyCode: number ): void {
+        this.keyboardService.enter(keyCode);
+    }
+
+    trackByFn(index, item) {
+        return item.Id;
     }
 }
