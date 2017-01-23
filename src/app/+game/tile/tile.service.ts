@@ -23,14 +23,14 @@ const Vectors = {
 export class TileService {
 
     /*
-    * A array to hold all the tiles' Id in their specific index place
-    * Their specific index is determined by their coordination
-    * */
+     * A array to hold all the tiles' Id in their specific index place
+     * Their specific index is determined by their coordination
+     * */
     private grid: string[];
 
     /*
-    * A array to hold all the tiles
-    * */
+     * A array to hold all the tiles
+     * */
     private tiles: Tile[];
 
     constructor( private store: Store<any> ) {
@@ -89,10 +89,10 @@ export class TileService {
     }
 
     /*
-    * Clean up the previous move history.
-    * reset every tile's merged status back to false
-    * clean all should-be-dump tile in tiles array
-    * */
+     * Clean up the previous move history.
+     * reset every tile's merged status back to false
+     * clean all should-be-dump tile in tiles array
+     * */
     prepareMove() {
         this.store.dispatch({type: RESET_TILE_STATUS});
     }
@@ -167,7 +167,10 @@ export class TileService {
         this.store.dispatch({type: REMOVE_ID, payload: {index: oldIndex}});
 
         // Moving a tile means we set the tile's coordination to a new one, and set it's merged and shouldDump status
-        this.store.dispatch({type: MOVE_TILE, payload: {newCoordination: newCoordination, oldTile: old, nextTile: next}})
+        this.store.dispatch({
+            type: MOVE_TILE,
+            payload: {newCoordination: newCoordination, oldTile: old, nextTile: next}
+        })
     }
 
     /* Save the tile's Id into grid array */
@@ -175,6 +178,33 @@ export class TileService {
         // After a tile moved to a new coordination, we need to save it's Id to the right place in grid array
         let index = coordinationToIndex(newCoordination);
         this.store.dispatch({type: ADD_ID, payload: {index: index, value: tile.Id}});
+    }
+
+    /* Check if there is any cell in grid array is null */
+    anyCellInGridAvailable(): boolean {
+        return this.getAllAvailableCells().length > 0;
+    }
+
+    /* Check if any two joint tiles could be merged */
+    tileMatchesAvailable(): boolean {
+        for (let i = 0; i < Size * Size; i++) {
+            let coordination = indexToCoordination(i),
+                tile = this.getTileAt(coordination);
+
+            if (tile) {
+                for (let vectorName in Vectors) {
+                    let vector = Vectors[vectorName];
+                    let otherCoordi = {x: coordination.x + vector.x, y: coordination.y + vector.y};
+                    let other = this.getTileAt(otherCoordi);
+
+                    if (other && other.value === tile.value) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
 

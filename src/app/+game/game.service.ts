@@ -5,8 +5,20 @@
 import { Injectable } from '@angular/core';
 import { TileService, Tile, traversalDirections, checkSameCoordination } from "./tile";
 
+export interface IGameStatus {
+    scores: number;
+    gameOver: boolean;
+    gameWon: boolean;
+}
+
 @Injectable()
 export class GameService {
+
+    private gameStatus: IGameStatus;
+
+    get GameStatus(): IGameStatus {
+        return this.gameStatus
+    }
 
     constructor( private tileService: TileService ) {
     }
@@ -17,11 +29,18 @@ export class GameService {
     }
 
     move( direction: string ) {
-        let hasMoved = false;
-        let scores = 0;
+
+        // If the game is over,
+        // we are not allowed to continue to make any move
+        if (this.gameStatus.gameOver) {
+            return;
+        }
+
+        let hasMoved = false; // set a flag to see if any tiles moved
+        let scores = 0; // a variable to hold the scores of this move
         this.tileService.prepareMove();
 
-        // We get the checking order based on the move direction
+        // We get the grid checking order based on the move direction
         let positions = traversalDirections(direction);
 
         positions.x.forEach(( x ) => {
@@ -72,11 +91,18 @@ export class GameService {
         if (hasMoved) {
             this.tileService.randomlyInsertTile();
 
-            /*if (!this.moveAvailable()) {
+            // After we insert a new tile,
+            // we need to check if there is any empty cell or any merge-able tiles.
+            // If there is none of those, that means the game is over
+            if (!this.moveAvailable()) {
                 this.gameStatus.gameOver = true;
-            }*/
+            }
         }
 
         return;
+    }
+
+    private moveAvailable(): boolean {
+        return this.tileService.anyCellInGridAvailable() || this.tileService.tileMatchesAvailable();
     }
 }
