@@ -9,16 +9,19 @@ import { RouterModule } from '@angular/router';
 import { routes } from './game.routes';
 import { GameComponent } from "./game.component";
 import { StoreModule } from "@ngrx/store";
-import { GridService, GameTileComponent, tilesReducer, gridReducer } from "./tile";
+import { GridService, tilesReducer, gridReducer } from "./tile";
 import { GameService } from "./game.service";
 import { KeyboardService } from "./keyboard.service";
 import { GameOverBoardComponent } from "./game-over-board";
+import { GameGridCellComponent } from "./game-grid-cell";
+import { GameTileCellComponent } from "./game-tile-cell";
 
 @NgModule({
     declarations: [
         // Components / Directives/ Pipes
         GameComponent,
-        GameTileComponent,
+        GameGridCellComponent,
+        GameTileCellComponent,
         GameOverBoardComponent,
     ],
     imports: [

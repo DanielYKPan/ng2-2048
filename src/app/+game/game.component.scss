@@ -1,9 +1,41 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/functions';
+@import '../../styles/utils/mixins';
+
 $board-width: 35rem;
 $board-padding: 2rem;
 $tile-radius: 10px;
 $tile-count: 4;
 $tile-padding: 1rem;
 $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padding)/$tile-count;
+
+$colors:  #EEE4DA, // 2
+#EAE0C8, // 4
+#F59563, // 8
+#3399ff, // 16
+#ffa333, // 32
+#cef030, // 64
+#E8D8CE, // 128
+#990303, // 256
+#6BA5DE, // 512
+#DCAD60, // 1024
+#B60022; // 2048
+
+@function power ($x, $n) {
+  $ret: 1;
+
+  @if $n >= 0 {
+    @for $i from 1 through $n {
+      $ret: $ret * $x;
+    }
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret / $x;
+    }
+  }
+
+  @return $ret;
+}
 
 .background-image {
   position: absolute;
@@ -30,12 +62,13 @@ $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padd
 
 .board {
   position: relative;
-  width: $board-width;
-  height: $board-width;
+  width: 100%;
+  height: 100%;
+  background: #bbaaa0;
+  border-radius: 1rem;
 }
 
 .game-board {
-  border-radius: .5em;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -44,8 +77,6 @@ $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padd
 
 .game-4-board {
   position: relative;
-  background: #bbaaa0;
-  padding: $board-padding;
   z-index: 5;
 }
 
@@ -58,7 +89,6 @@ $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padd
 
 .grid-board {
   z-index: 1;
-  margin: 0 auto;
   height: 100%;
   width: 100%;
   display: flex;
@@ -80,6 +110,6 @@ $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padd
   left: 0;
   right: 0;
   height: 100%;
-  padding: $board-padding;
+  width: 100%;
   z-index: 2;
 }

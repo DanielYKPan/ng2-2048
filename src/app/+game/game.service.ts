@@ -9,6 +9,7 @@ export interface IGameStatus {
     scores: number;
     gameOver: boolean;
     gameWon: boolean;
+    tileWidth: number;
 }
 
 @Injectable()
@@ -103,6 +104,10 @@ export class GameService {
         return;
     }
 
+    setTileWidth(width: number) {
+        this.gameStatus.tileWidth = width;
+    }
+
     private moveAvailable(): boolean {
         return this.gridService.anyCellInGridAvailable() || this.gridService.tileMatchesAvailable();
     }
@@ -111,7 +116,8 @@ export class GameService {
         this.gameStatus = {
             scores: 0,
             gameOver: false,
-            gameWon: false
+            gameWon: false,
+            tileWidth: 0
         }
     }
 }

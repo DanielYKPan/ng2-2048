@@ -2,7 +2,10 @@
  * game.component
  */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, AfterContentInit, ViewChild, ElementRef, Renderer,
+    ViewChildren, QueryList, ContentChildren
+} from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Tile } from "./tile/tile";
 import { Subscription } from "rxjs";
@@ -14,7 +17,41 @@ import { KeyboardService } from "./keyboard.service";
     styleUrls: ['game.component.scss'],
     templateUrl: 'game.component.html'
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnInit, AfterContentInit, OnDestroy {
+
+    @ViewChild('board') board: ElementRef;
+
+    ngAfterContentInit(): void {
+        let boardSize;
+        if (window.innerWidth > window.innerHeight) {
+            /** Size for large screens */
+            if (window.innerWidth < 600) {
+                console.log('screen < 600');
+                boardSize = Math.floor((window.innerHeight - 230));
+            }
+            else {
+                console.log('screen >600');
+                boardSize = Math.floor((window.innerHeight - 300));
+            }
+        }
+        else {
+            /** Size for mobile screens */
+            if(window.innerHeight < 500){
+                console.log('mobile screen > ');
+                boardSize = Math.floor((window.innerHeight - 90));
+            }
+            else{
+                console.log('mobile screen > 500');
+                boardSize = Math.floor((window.innerWidth - 100));
+            }
+        }
+
+        this.renderer.setElementStyle(this.board.nativeElement, 'width', boardSize + 'px');
+        this.renderer.setElementStyle(this.board.nativeElement, 'height', boardSize + 'px');
+        this.renderer.setElementStyle(this.board.nativeElement, 'padding', (boardSize/4 * 0.1) + 'px');
+        let tileWidth = (boardSize - boardSize/4 * 0.1 * 2)/4;
+        this.gameService.setTileWidth(tileWidth);
+    }
 
     tiles: Tile[];
     grid: string[];
@@ -25,6 +62,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private arrowsSub: Subscription;
 
     constructor( private store: Store<any>,
+                 private renderer: Renderer,
                  private keyboardService: KeyboardService,
                  private gameService: GameService ) {
     }
