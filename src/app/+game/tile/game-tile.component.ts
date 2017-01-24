@@ -17,7 +17,7 @@ import { Tile } from "./tile";
     [class.is-merged]="tile.merged">
     <div class="tile-inner" 
         [@mergedState]="tile.merged ? 'merged' : 'unmerged'">
-        {{tile.value}}
+        <span class="tile-value">{{tile.value}}</span>
     </div>
 </div>
 `,

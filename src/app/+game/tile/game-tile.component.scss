@@ -73,10 +73,11 @@ $colors:  #EEE4DA, // 2
   .tile-inner {
     @include type-setting(4);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    text-align: center;
-    padding: $base-line-height 0;
     font-weight: bold;
     border-radius: $tile-radius;
   }

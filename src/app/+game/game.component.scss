@@ -32,7 +32,6 @@ $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padd
   position: relative;
   width: $board-width;
   height: $board-width;
-  margin: 40px auto;
 }
 
 .game-board {
