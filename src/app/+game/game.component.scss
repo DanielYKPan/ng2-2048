@@ -5,28 +5,27 @@ $tile-count: 4;
 $tile-padding: 1rem;
 $tile-width: (($board-width - 2 * $board-padding) - ($tile-count - 1)*$tile-padding)/$tile-count;
 
-.game-wrapper {
-  display: flex;
-  justify-content: space-around;
-  color: #776E65;
-
-  .game-control {
-    width: 20%;
-  }
-
-  .game-panel {
-    width: 75%;
-  }
-}
-
 .background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #faf8ef;
-  z-index: -99999;
+  background: #faf8ef resolve('img/background-1.jpg') repeat;
+}
+
+.game-wrapper {
+  display: flex;
+  justify-content: space-around;
+  color: #776E65;
+  min-height: 100vh;
+
+  .game-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .board {

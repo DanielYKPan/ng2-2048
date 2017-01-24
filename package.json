@@ -132,6 +132,7 @@
     "npm-run-all": "^4.0.0",
     "parse5": "^3.0.1",
     "pixrem": "^3.0.2",
+    "postcss-assets": "^4.1.0",
     "postcss-loader": "^1.2.2",
     "protractor": "^4.0.14",
     "raw-loader": "0.5.1",
