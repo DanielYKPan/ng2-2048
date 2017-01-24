@@ -2,7 +2,7 @@
  * tile
  */
 
-import { uuid } from "../uuid";
+import { uuid } from "./uuid";
 
 export interface Coordination {
     x: number;

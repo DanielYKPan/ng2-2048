@@ -3,7 +3,7 @@
  */
 import { ActionReducer } from "@ngrx/store";
 import { Tile } from "./tile";
-import { ADD_TILE, RESET_TILES, RESET_TILE_STATUS, MOVE_TILE } from "../actions.const";
+import { ADD_TILE, RESET_TILES, RESET_TILE_STATUS, MOVE_TILE } from "./actions.const";
 
 export const tilesReducer: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) => {
     switch (action.type) {

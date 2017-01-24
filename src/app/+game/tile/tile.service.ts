@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Tile, Coordination } from "./tile";
 import {
     ADD_TILE, BUILD_GRID, ADD_ID, RESET_TILES, RESET_TILE_STATUS, REMOVE_ID, MOVE_TILE,
-} from "../actions.const";
+} from "./actions.const";
 import { Store } from "@ngrx/store";
 
 const Size: number = 4;
