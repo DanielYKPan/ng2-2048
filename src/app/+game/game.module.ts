@@ -16,12 +16,14 @@ import { GameOverBoardComponent } from "./game-over-board";
 import { GameGridCellComponent } from "./game-grid-cell";
 import { GameTileCellComponent } from "./game-tile-cell";
 import { GameHeaderComponent } from "./header";
+import { GameScoreComponent } from "./game-score";
 
 @NgModule({
     declarations: [
         // Components / Directives/ Pipes
         GameComponent,
         GameHeaderComponent,
+        GameScoreComponent,
         GameGridCellComponent,
         GameTileCellComponent,
         GameOverBoardComponent,
@@ -31,7 +33,7 @@ import { GameHeaderComponent } from "./header";
         FormsModule,
         RouterModule.forChild(routes),
         StoreModule.provideStore({
-            tiles : tilesReducer,
+            tiles: tilesReducer,
             grid: gridReducer
         }),
     ],

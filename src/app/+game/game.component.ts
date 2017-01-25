@@ -64,7 +64,7 @@ export class GameComponent implements OnInit, AfterContentInit, OnDestroy {
             }
             else {
                 console.log('screen >600');
-                boardSize = Math.floor((window.innerHeight - 200));
+                boardSize = Math.floor((window.innerHeight - 300));
             }
         }
         else {
