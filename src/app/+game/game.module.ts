@@ -19,6 +19,7 @@ import { GameHeaderComponent } from "./game-header";
 import { GameScoreComponent } from "./game-score";
 import { GamePanelComponent } from "./game-panel";
 import { GameAboutComponent } from "./game-about";
+import { SocialBtnComponent } from "./game-about/social-btn.component";
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { GameAboutComponent } from "./game-about";
         GameScoreComponent,
         GamePanelComponent,
         GameAboutComponent,
+        SocialBtnComponent,
         GameGridCellComponent,
         GameTileCellComponent,
         GameOverBoardComponent,

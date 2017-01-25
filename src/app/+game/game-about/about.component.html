@@ -9,6 +9,9 @@
     <div class="about-body">
         <p>The goal is to get a single square to be 2048. Get two of the same number next to each other to add them together.
             Use the arrow keys to add squares together. Take a break every now and then for food and water.</p>
-        <p>Author: Daniel Pan</p>
+        <p><strong>Author:</strong> Daniel Pan</p>
+    </div>
+    <div class="social">
+        <app-game-about-social *ngFor="let btn of socialBtns" [btn]="btn"></app-game-about-social>
     </div>
 </div>

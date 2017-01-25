@@ -13,7 +13,7 @@
   align-content: space-around;
   margin: 0 auto;
   max-width: 500px;
-  width: 100%;
+  width: 95%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -53,4 +53,12 @@ p {
   @include type-setting(1);
   font-family: cursive;
   margin: 0;
+}
+
+.social {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  margin: $base-line-height 1rem;
+  width: 100%;
 }
