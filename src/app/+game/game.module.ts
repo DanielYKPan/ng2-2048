@@ -15,8 +15,9 @@ import { KeyboardService } from "./keyboard.service";
 import { GameOverBoardComponent } from "./game-over-board";
 import { GameGridCellComponent } from "./game-grid-cell";
 import { GameTileCellComponent } from "./game-tile-cell";
-import { GameHeaderComponent } from "./header";
+import { GameHeaderComponent } from "./game-header";
 import { GameScoreComponent } from "./game-score";
+import { GamePanelComponent } from "./game-panel";
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { GameScoreComponent } from "./game-score";
         GameComponent,
         GameHeaderComponent,
         GameScoreComponent,
+        GamePanelComponent,
         GameGridCellComponent,
         GameTileCellComponent,
         GameOverBoardComponent,

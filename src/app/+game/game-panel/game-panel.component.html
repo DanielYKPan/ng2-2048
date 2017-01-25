@@ -1,0 +1,23 @@
+<div class="game-wrapper">
+    <section class="game-panel">
+        <div #board class="board" (window:keydown)="clickKeyBoard($event.keyCode)">
+            <div class="game-board game-4-board">
+                <div class="grid-board">
+                    <app-game-cell *ngFor="let item of grid;"></app-game-cell>
+                </div>
+                <div class="tile-board">
+                    <!-- <app-game-tile *ngFor="let tile of tiles; trackBy: trackByFn"
+                                    [tile]="tile"></app-game-tile>-->
+                    <game-tile-cell *ngFor="let tile of tiles; trackBy: trackByFn"
+                                    class="tile-cell position-{{tile.coordination.x}}-{{tile.coordination.y}}"
+                                    [class.is-merged] = "tile.merged"
+                                    [tile]="tile"></game-tile-cell>
+                </div>
+            </div>
+            <div class="game-board game-over-board" *ngIf="gameStatus.gameOver">
+                <game-over-board (restartBtnClick)="newGame()"></game-over-board>
+            </div>
+        </div>
+    </section>
+</div>
+<app-game-score [scores]="gameStatus.scores"></app-game-score>
