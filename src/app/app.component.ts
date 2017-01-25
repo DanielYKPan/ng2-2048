@@ -20,6 +20,10 @@ import { AppState } from './app.service';
     ],
     template: `
 <div class="site-wrap">
+    <header class="site-header">
+        <div class="bg"></div>
+        <h1>2048</h1>
+    </header>
     <main>
       <router-outlet></router-outlet>
     </main>

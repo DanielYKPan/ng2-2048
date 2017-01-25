@@ -2,6 +2,10 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+@import url("https://fonts.googleapis.com/css?family=Bungee|Bungee+Outline");
+
+$base-font: 'Bungee', cursive, sans-serif;
+
 /// Base font size
 /// @type Size
 $base-font-size: 1rem;

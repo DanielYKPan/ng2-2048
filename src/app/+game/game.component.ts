@@ -3,8 +3,7 @@
  */
 
 import {
-    Component, OnInit, OnDestroy, AfterContentInit, ViewChild, ElementRef, Renderer,
-    ViewChildren, QueryList, ContentChildren
+    Component, OnInit, OnDestroy, AfterContentInit, ViewChild, ElementRef, Renderer
 } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Tile } from "./tile/tile";
