@@ -3,6 +3,7 @@
  */
 
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-game-header',
@@ -15,13 +16,18 @@ export class GameHeaderComponent implements OnInit {
 
     @Output() onNewGameBtnClick = new EventEmitter<boolean>();
 
-    constructor() {
+    constructor( private router: Router ) {
     }
 
     ngOnInit(): void {
     }
 
     newGame(): void {
+        this.router.navigate(['']);
         this.onNewGameBtnClick.emit(true);
+    }
+
+    checkAbout() {
+        this.router.navigate(['/game/about']);
     }
 }

@@ -18,6 +18,7 @@ import { GameTileCellComponent } from "./game-tile-cell";
 import { GameHeaderComponent } from "./game-header";
 import { GameScoreComponent } from "./game-score";
 import { GamePanelComponent } from "./game-panel";
+import { GameAboutComponent } from "./game-about";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { GamePanelComponent } from "./game-panel";
         GameHeaderComponent,
         GameScoreComponent,
         GamePanelComponent,
+        GameAboutComponent,
         GameGridCellComponent,
         GameTileCellComponent,
         GameOverBoardComponent,
