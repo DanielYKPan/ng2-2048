@@ -1,3 +1,4 @@
+<app-game-header (onNewGameBtnClick)="newGame()"></app-game-header>
 <div class="game-wrapper">
     <section class="game-panel">
         <div #board class="board" (window:keydown)="clickKeyBoard($event.keyCode)">

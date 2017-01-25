@@ -17,7 +17,6 @@ import { ENV_PROVIDERS } from './environment';
 // App is our top level component
 import { AppRoutingModule } from "./app.routes";
 import { AppComponent } from './app.component';
-import { HeaderComponent } from "./header";
 import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
@@ -42,7 +41,6 @@ type StoreType = {
     bootstrap: [AppComponent],
     declarations: [
         AppComponent,
-        HeaderComponent,
         NoContentComponent,
     ],
     imports: [ // import Angular's modules

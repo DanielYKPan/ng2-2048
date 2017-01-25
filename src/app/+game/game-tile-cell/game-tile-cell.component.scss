@@ -30,6 +30,9 @@ $colors: #EEE4DA, // 2
   position: absolute;
   transition: transform 100ms ease-in-out;
   z-index: 10;
+  max-width: 142px;
+  max-height: 142px;
+  padding: 5.6px;
 
   &.is-merged {
     z-index: 20;

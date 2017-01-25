@@ -10,12 +10,19 @@ export interface IGameStatus {
     gameOver: boolean;
     gameWon: boolean;
     tileWidth: number;
+    fontSize: number;
 }
 
 @Injectable()
 export class GameService {
 
-    private gameStatus: IGameStatus;
+    private gameStatus: IGameStatus = {
+        scores: 0,
+        gameOver: false,
+        gameWon: false,
+        tileWidth: 142,
+        fontSize: 57
+    };
 
     get GameStatus(): IGameStatus {
         return this.gameStatus
@@ -104,8 +111,9 @@ export class GameService {
         return;
     }
 
-    setTileWidth(width: number) {
-        this.gameStatus.tileWidth = width;
+    setTileStyle(width: number): void {
+        this.gameStatus.tileWidth = width > this.gameStatus.tileWidth ? this.gameStatus.tileWidth : width;
+        this.gameStatus.fontSize = width * 0.4 > this.gameStatus.fontSize ? this.gameStatus.fontSize : width * 0.4;
     }
 
     private moveAvailable(): boolean {
@@ -113,11 +121,8 @@ export class GameService {
     }
 
     private resetGameStatus(): void {
-        this.gameStatus = {
-            scores: 0,
-            gameOver: false,
-            gameWon: false,
-            tileWidth: 0
-        }
+        this.gameStatus.scores = 0;
+        this.gameStatus.gameWon = false;
+        this.gameStatus.gameOver = false;
     }
 }

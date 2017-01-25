@@ -15,11 +15,13 @@ import { KeyboardService } from "./keyboard.service";
 import { GameOverBoardComponent } from "./game-over-board";
 import { GameGridCellComponent } from "./game-grid-cell";
 import { GameTileCellComponent } from "./game-tile-cell";
+import { GameHeaderComponent } from "./header";
 
 @NgModule({
     declarations: [
         // Components / Directives/ Pipes
         GameComponent,
+        GameHeaderComponent,
         GameGridCellComponent,
         GameTileCellComponent,
         GameOverBoardComponent,
