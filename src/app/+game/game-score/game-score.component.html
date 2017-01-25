@@ -1,5 +1,11 @@
-<div class="game-score">
+<div class="game-score" [@panelState]="'true'">
     <div class="bg"></div>
-    <div class="score">{{scores}}</div>
+    <div class="score">
+        <span class="increase"
+              *ngFor="let s of increasedScores"
+              [@scoreIncreasedState]="s.state"
+              (@scoreIncreasedState.done)="animationDone($event)">+ {{s.value}}</span>
+        <span class="total">{{scores}}</span>
+    </div>
     <h4>Score</h4>
 </div>

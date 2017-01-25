@@ -50,4 +50,16 @@ $color-brown: #603309;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .increase {
+    @include type-setting(0);
+    color: #ad3a44;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .total {
+    z-index: 1;
+  }
 }

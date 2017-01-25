@@ -93,6 +93,11 @@ export class GameService {
         });
 
 
+        // Update the game score after grid checking
+        if (scores > 0) {
+            this.updateScores(scores);
+        }
+
         //this.gameStatus.scores += scores;
 
         // If any tile's move to a new place,
@@ -111,7 +116,7 @@ export class GameService {
         return;
     }
 
-    setTileStyle(width: number): void {
+    setTileStyle( width: number ): void {
         this.gameStatus.tileWidth = width > this.gameStatus.tileWidth ? this.gameStatus.tileWidth : width;
         this.gameStatus.fontSize = width * 0.4 > this.gameStatus.fontSize ? this.gameStatus.fontSize : width * 0.4;
     }
@@ -124,5 +129,11 @@ export class GameService {
         this.gameStatus.scores = 0;
         this.gameStatus.gameWon = false;
         this.gameStatus.gameOver = false;
+    }
+
+    private updateScores( scores: number ): void {
+        if (scores > 0)
+            this.gameStatus.scores += scores;
+        return;
     }
 }
