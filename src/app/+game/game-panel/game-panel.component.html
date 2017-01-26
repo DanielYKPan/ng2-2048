@@ -16,7 +16,7 @@
                                     [tile]="tile"></game-tile-cell>
                 </div>
             </div>
-            <div class="game-board game-over-board" *ngIf="gameStatus.gameOver">
+            <div class="game-board game-over-board">
                 <game-over-board (restartBtnClick)="newGame()"></game-over-board>
             </div>
         </div>

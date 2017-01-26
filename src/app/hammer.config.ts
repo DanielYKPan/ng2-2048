@@ -7,6 +7,7 @@ import { HammerGestureConfig } from "@angular/platform-browser";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     // https://github.com/hammerjs/hammer.js/issues/1014
+    // http://stackoverflow.com/questions/35728451/using-mobile-events-in-angular2
     buildHammer(element: HTMLElement) {
         let mc = new Hammer(element);
 
