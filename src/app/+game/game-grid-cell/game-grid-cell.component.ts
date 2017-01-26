@@ -2,13 +2,14 @@
  * game-grid-cell.component
  */
 
-import { Component, OnInit, ElementRef, Renderer } from "@angular/core";
-import { GameService } from "../game.service";
+import { Component, OnInit, ElementRef, Renderer, ChangeDetectionStrategy } from "@angular/core";
+import { GameService } from "../service";
 
 @Component({
     selector: 'app-game-cell',
     templateUrl: './game-grid-cell.component.html',
-    styleUrls: ['./game-grid-cell.component.scss']
+    styleUrls: ['./game-grid-cell.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class GameGridCellComponent implements OnInit {

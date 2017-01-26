@@ -7,9 +7,7 @@ import {
 } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { Tile } from "../tile";
-import { IGameStatus, GameService } from "../game.service";
-import { KeyboardService } from "../keyboard.service";
+import { KeyboardService, Tile, IGameStatus, GameService } from "../service";
 
 @Component({
     selector: 'app-game-panel',

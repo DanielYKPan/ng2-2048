@@ -9,17 +9,14 @@ import { RouterModule } from '@angular/router';
 import { routes } from './game.routes';
 import { GameComponent } from "./game.component";
 import { StoreModule } from "@ngrx/store";
-import { GridService, tilesReducer, gridReducer } from "./tile";
-import { GameService } from "./game.service";
-import { KeyboardService } from "./keyboard.service";
+import { GameService, GridService, KeyboardService, tilesReducer, gridReducer } from "./service";
 import { GameOverBoardComponent } from "./game-over-board";
 import { GameGridCellComponent } from "./game-grid-cell";
 import { GameTileCellComponent } from "./game-tile-cell";
 import { GameHeaderComponent } from "./game-header";
 import { GameScoreComponent } from "./game-score";
 import { GamePanelComponent } from "./game-panel";
-import { GameAboutComponent } from "./game-about";
-import { SocialBtnComponent } from "./game-about/social-btn.component";
+import { GameAboutComponent, SocialBtnComponent } from "./game-about";
 
 @NgModule({
     declarations: [

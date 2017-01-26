@@ -1,0 +1,10 @@
+/**
+ * index
+ */
+
+export { Tile } from './tile';
+export { tilesReducer } from './tiles.reducer';
+export { gridReducer } from './grid.reducer';
+export { GridService, traversalDirections, checkSameCoordination } from './grid.service';
+export { KeyboardService } from './keyboard.service';
+export { GameService, IGameStatus } from './game.service';

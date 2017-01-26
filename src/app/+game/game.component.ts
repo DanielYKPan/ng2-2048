@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { GameService } from "./game.service";
+import { GameService } from "./service";
 @Component({
     selector: 'app-game',
     styleUrls: ['game.component.scss'],

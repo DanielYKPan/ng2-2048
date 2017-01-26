@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { GridService, Tile, traversalDirections, checkSameCoordination } from "./tile";
+import { GridService, Tile, traversalDirections, checkSameCoordination } from "./";
 
 export interface IGameStatus {
     scores: number;

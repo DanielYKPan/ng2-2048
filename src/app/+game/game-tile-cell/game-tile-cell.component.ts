@@ -6,8 +6,7 @@ import {
     Component, OnInit, ElementRef, Renderer, Input, SimpleChange, trigger, transition,
     animate, style, keyframes, ChangeDetectionStrategy
 } from "@angular/core";
-import { GameService } from "../game.service";
-import { Tile } from "../tile";
+import { GameService, Tile } from "../service";
 
 @Component({
     selector: 'game-tile-cell',
