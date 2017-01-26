@@ -50,7 +50,11 @@
 }
 
 p {
-  @include type-setting(1);
+  @include type-setting(0);
+
+  @include respond-to(medium) {
+    @include type-setting(1);
+  }
   font-family: cursive;
   margin: 0;
 }
