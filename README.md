@@ -1,5 +1,7 @@
 # Game 2048
 
+**[Demo](https://yk-game-2048.firebaseapp.com)**
+
 <p align="center"><img style="text-align: center;" src="/assets/2048.png?raw=true"></p>
 2048 is a challenging number puzzle for kids and grown ups. The object is to join the numbers to get the 2048 tile.hen two tiles with the same number touch, they merge into one!
 

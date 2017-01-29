@@ -23,8 +23,11 @@ export class GameHeaderComponent implements OnInit {
     }
 
     newGame(): void {
-        this.router.navigate(['']);
-        this.onNewGameBtnClick.emit(true);
+        if(this.router.url == '/game') {
+            this.onNewGameBtnClick.emit(true);
+        } else {
+            this.router.navigate(['/game']);
+        }
     }
 
     checkAbout() {
