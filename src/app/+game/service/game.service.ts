@@ -11,6 +11,7 @@ export interface IGameStatus {
     gameWon: boolean;
     tileWidth: number;
     fontSize: number;
+    gameGold: number;
 }
 
 @Injectable()
@@ -21,7 +22,8 @@ export class GameService {
         gameOver: false,
         gameWon: false,
         tileWidth: 142,
-        fontSize: 57
+        fontSize: 57,
+        gameGold: 2048
     };
 
     get GameStatus(): IGameStatus {
@@ -78,6 +80,11 @@ export class GameService {
                         scores += next.value; // Add the new value to scoring table
 
                         hasMoved = true;
+
+                        // Check if the merged tile's value has achieved the game gold
+                        if (next.value >= this.gameStatus.gameGold && !this.gameStatus.gameWon) {
+                            this.gameStatus.gameWon = true;
+                        }
                     } else {
                         // It a tile's next tile not exists,
                         // that means the new coordination is empty and we could move the tile to the new place
@@ -108,7 +115,7 @@ export class GameService {
             // After we insert a new tile,
             // we need to check if there is any empty cell or any merge-able tiles.
             // If there is none of those, that means the game is over
-            if (!this.moveAvailable()) {
+            if (!this.gameStatus.gameWon && !this.moveAvailable()) {
                 this.gameStatus.gameOver = true;
             }
         }

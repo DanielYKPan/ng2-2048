@@ -12,7 +12,7 @@
                 <div class="tile-board">
                     <game-tile-cell *ngFor="let tile of tiles; trackBy: trackByFn"
                                     class="tile-cell position-{{tile.coordination.x}}-{{tile.coordination.y}}"
-                                    [class.is-merged] = "tile.merged"
+                                    [class.is-merged]="tile.merged"
                                     [tile]="tile"></game-tile-cell>
                 </div>
             </div>
@@ -20,6 +20,10 @@
                 <game-over-board (restartBtnClick)="newGame()"></game-over-board>
             </div>
         </div>
+    </section>
+
+    <section class="game-message" [class.show]="gameStatus.gameWon">
+        Congratulations! You have made a 2048 tile! Continue to make 4096, 8192...
     </section>
 </div>
 <app-game-score [scores]="gameStatus.scores"></app-game-score>

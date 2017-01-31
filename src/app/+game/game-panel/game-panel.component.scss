@@ -1,3 +1,7 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/functions';
+@import '../../../styles/utils/mixins';
+
 $colors:  #EEE4DA, // 2
 #EAE0C8, // 4
 #F59563, // 8
@@ -33,6 +37,7 @@ $colors:  #EEE4DA, // 2
 
 .game-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #776E65;
@@ -88,4 +93,18 @@ $colors:  #EEE4DA, // 2
   height: 100%;
   width: 100%;
   z-index: 2;
+}
+
+.game-message{
+  font-family: cursive, sans-serif;
+  color: #603309;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  margin: $base-line-height 0;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
 }
