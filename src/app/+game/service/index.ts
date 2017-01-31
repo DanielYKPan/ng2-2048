@@ -8,3 +8,4 @@ export { gridReducer } from './grid.reducer';
 export { GridService, traversalDirections, checkSameCoordination } from './grid.service';
 export { KeyboardService } from './keyboard.service';
 export { GameService, IGameStatus } from './game.service';
+export { gameStateReducer, IGameState } from './game-state.reducer';

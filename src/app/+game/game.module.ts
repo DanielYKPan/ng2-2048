@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './game.routes';
 import { GameComponent } from "./game.component";
 import { StoreModule } from "@ngrx/store";
-import { GameService, GridService, KeyboardService, tilesReducer, gridReducer } from "./service";
+import { GameService, GridService, KeyboardService, tilesReducer, gridReducer, gameStateReducer } from "./service";
 import { GameOverBoardComponent } from "./game-over-board";
 import { GameGridCellComponent } from "./game-grid-cell";
 import { GameTileCellComponent } from "./game-tile-cell";
@@ -37,7 +37,8 @@ import { GameAboutComponent, SocialBtnComponent } from "./game-about";
         RouterModule.forChild(routes),
         StoreModule.provideStore({
             tiles: tilesReducer,
-            grid: gridReducer
+            grid: gridReducer,
+            gameState: gameStateReducer
         }),
     ],
     providers: [
