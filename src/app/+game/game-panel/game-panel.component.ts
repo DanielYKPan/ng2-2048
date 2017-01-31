@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { KeyboardService, Tile, IGameStatus, GameService } from "../service";
+import { KeyboardService, Tile, GameService, IGameState } from "../service";
 
 @Component({
     selector: 'app-game-panel',
@@ -20,10 +20,11 @@ export class GamePanelComponent implements OnInit, AfterContentInit, OnDestroy {
 
     tiles: Tile[];
     grid: string[];
-    gameStatus: IGameStatus;
+    gameState: IGameState;
 
     private selectTilesSub: Subscription;
     private selectIDGridSub: Subscription;
+    private selectGameStateSub: Subscription;
     private arrowsSub: Subscription;
 
     constructor( private store: Store<any>,
@@ -43,6 +44,10 @@ export class GamePanelComponent implements OnInit, AfterContentInit, OnDestroy {
             ( data: string[] ) => {
                 this.grid = data;
             }
+        );
+
+        this.selectGameStateSub = this.store.select('gameState').subscribe(
+            ( data: IGameState ) => this.gameState = data
         );
 
         this.arrowsSub = this.keyboardService.arrows.subscribe(
@@ -81,7 +86,6 @@ export class GamePanelComponent implements OnInit, AfterContentInit, OnDestroy {
         this.renderer.setElementStyle(this.board.nativeElement, 'height', boardSize + 'px');
         let tileWidth = (boardSize - 32) / 4;
         this.gameService.setTileStyle(tileWidth);
-        this.renderer.setElementStyle(this.board.nativeElement, 'font-size', this.gameService.GameStatus.fontSize + 'px');
     }
 
     ngOnDestroy(): void {
@@ -91,13 +95,15 @@ export class GamePanelComponent implements OnInit, AfterContentInit, OnDestroy {
         if (this.selectIDGridSub)
             this.selectIDGridSub.unsubscribe();
 
+        if (this.selectGameStateSub)
+            this.selectGameStateSub.unsubscribe();
+
         if (this.arrowsSub)
             this.arrowsSub.unsubscribe();
     }
 
     newGame(): void {
         this.gameService.newGame();
-        this.gameStatus = this.gameService.GameStatus;
     }
 
     clickKeyBoard( keyCode: number ): void {

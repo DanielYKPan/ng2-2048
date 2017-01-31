@@ -6,7 +6,7 @@ import {
     Component, OnInit, ElementRef, Renderer, Input, SimpleChange, trigger, transition,
     animate, style, keyframes, ChangeDetectionStrategy
 } from "@angular/core";
-import { GameService, Tile } from "../service";
+import { Tile, IGameState } from "../service";
 
 @Component({
     selector: 'game-tile-cell',
@@ -33,39 +33,39 @@ import { GameService, Tile } from "../service";
 export class GameTileCellComponent implements OnInit {
 
     @Input() tile: Tile;
-    private tileWidth: number;
+    @Input() gameState: IGameState;
 
     constructor( private element: ElementRef,
-                 private renderer: Renderer,
-                 private gameService: GameService ) {
+                 private renderer: Renderer ) {
     }
 
     ngOnInit(): void {
-        this.tileWidth = this.gameService.GameStatus.tileWidth;
         this.setElementSize();
         this.setElementTransform();
     }
 
     ngOnChanges( changes: SimpleChange ) {
-        let pre_t = changes['tile'].previousValue;
-        let cur_t = changes['tile'].currentValue;
+        if (changes['tile']) {
+            let pre_t = changes['tile'].previousValue;
+            let cur_t = changes['tile'].currentValue;
 
-        if (cur_t.coordination && pre_t.coordination && (cur_t.coordination.x != pre_t.coordination.x || cur_t.coordination.y != pre_t.coordination.y)) {
-            this.setElementTransform();
+            if (cur_t.coordination && pre_t.coordination && (cur_t.coordination.x != pre_t.coordination.x || cur_t.coordination.y != pre_t.coordination.y)) {
+                this.setElementTransform();
+            }
         }
     }
 
     private setElementSize() {
-        let padding = this.gameService.GameStatus.tileWidth * 0.04;
+        let padding = this.gameState.tileSize * 0.04;
         this.renderer.setElementStyle(this.element.nativeElement, 'padding', padding + 'px');
-        this.renderer.setElementStyle(this.element.nativeElement, 'width', this.tileWidth + 'px');
-        this.renderer.setElementStyle(this.element.nativeElement, 'height', this.tileWidth + 'px');
-        this.renderer.setElementStyle(this.element.nativeElement, 'font-size', this.tileWidth * 0.4 + 'px');
+        this.renderer.setElementStyle(this.element.nativeElement, 'width', this.gameState.tileSize + 'px');
+        this.renderer.setElementStyle(this.element.nativeElement, 'height', this.gameState.tileSize + 'px');
+        this.renderer.setElementStyle(this.element.nativeElement, 'font-size', this.gameState.fontSize + 'px');
     }
 
     private setElementTransform(): void {
-        let t_x = this.tileWidth * this.tile.coordination.x;
-        let t_y = this.tileWidth * this.tile.coordination.y;
+        let t_x = this.gameState.tileSize * this.tile.coordination.x;
+        let t_y = this.gameState.tileSize * this.tile.coordination.y;
         this.renderer.setElementStyle(this.element.nativeElement, 'transform', 'translate(' + t_x + 'px,' + t_y + 'px' + ')');
     }
 }

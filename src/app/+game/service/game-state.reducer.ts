@@ -18,7 +18,7 @@ const defaultGameState = {
     scores: 0,
     gameOver: false,
     gameWon: false,
-    tileSize: 120,
+    tileSize: 142,
     fontSize: 57,
     gameGold: 2048
 };

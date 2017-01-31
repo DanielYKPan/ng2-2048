@@ -3,34 +3,23 @@
  */
 
 import { Injectable } from '@angular/core';
-import { GridService, Tile, traversalDirections, checkSameCoordination } from "./";
-
-export interface IGameStatus {
-    scores: number;
-    gameOver: boolean;
-    gameWon: boolean;
-    tileWidth: number;
-    fontSize: number;
-    gameGold: number;
-}
+import { GridService, Tile, traversalDirections, checkSameCoordination, IGameState } from "./";
+import { Store } from "@ngrx/store";
+import { SET_GAME_STATE } from "./actions.const";
 
 @Injectable()
 export class GameService {
 
-    private gameStatus: IGameStatus = {
-        scores: 0,
-        gameOver: false,
-        gameWon: false,
-        tileWidth: 142,
-        fontSize: 57,
-        gameGold: 2048
-    };
+    private gameState: IGameState;
 
-    get GameStatus(): IGameStatus {
-        return this.gameStatus
-    }
+    constructor( private gridService: GridService,
+                 private store: Store<any> ) {
 
-    constructor( private gridService: GridService ) {
+        this.store.select('gameState').subscribe(
+            ( data: IGameState ) => {
+                this.gameState = data;
+            }
+        );
     }
 
     newGame() {
@@ -43,12 +32,14 @@ export class GameService {
 
         // If the game is over,
         // we are not allowed to continue to make any move
-        if (this.gameStatus.gameOver) {
+        if (this.gameState.gameOver) {
             return;
         }
 
         let hasMoved = false; // set a flag to see if any tiles moved
         let scores = 0; // a variable to hold the scores of this move
+        let gameWon = false; // a flag to see if a game has achieved gold
+        let gameOver = false;// a flag to see if a game has ended
         this.gridService.prepareMove();
 
         // We get the grid checking order based on the move direction
@@ -82,8 +73,8 @@ export class GameService {
                         hasMoved = true;
 
                         // Check if the merged tile's value has achieved the game gold
-                        if (next.value >= this.gameStatus.gameGold && !this.gameStatus.gameWon) {
-                            this.gameStatus.gameWon = true;
+                        if (next.value >= this.gameState.gameGold && !gameWon) {
+                            gameWon = true;
                         }
                     } else {
                         // It a tile's next tile not exists,
@@ -102,10 +93,10 @@ export class GameService {
 
         // Update the game score after grid checking
         if (scores > 0) {
-            this.updateScores(scores);
+            scores = this.gameState.scores + scores;
+        }else {
+            scores = this.gameState.scores;
         }
-
-        //this.gameStatus.scores += scores;
 
         // If any tile's move to a new place,
         // that means we at least make a proper move and we randomly add a new tile into the grid
@@ -115,17 +106,33 @@ export class GameService {
             // After we insert a new tile,
             // we need to check if there is any empty cell or any merge-able tiles.
             // If there is none of those, that means the game is over
-            if (!this.gameStatus.gameWon && !this.moveAvailable()) {
-                this.gameStatus.gameOver = true;
+            if (!gameWon && !this.moveAvailable()) {
+                gameOver = true;
             }
         }
+
+        this.store.dispatch({
+            type: SET_GAME_STATE, payload: {
+                scores: scores,
+                gameOver: gameOver,
+                gameWon: this.gameState.gameWon || gameWon
+            }
+        });
 
         return;
     }
 
     setTileStyle( width: number ): void {
-        this.gameStatus.tileWidth = width > this.gameStatus.tileWidth ? this.gameStatus.tileWidth : width;
-        this.gameStatus.fontSize = width * 0.4 > this.gameStatus.fontSize ? this.gameStatus.fontSize : width * 0.4;
+        let tileSize = width > this.gameState.tileSize ? this.gameState.tileSize : width;
+        let fontSize = width * 0.4 > this.gameState.fontSize ? this.gameState.fontSize : width * 0.4;
+
+        this.store.dispatch({
+            type: SET_GAME_STATE, payload: {
+                tileSize: tileSize,
+                fontSize: fontSize
+            }
+        });
+        return;
     }
 
     private moveAvailable(): boolean {
@@ -133,14 +140,12 @@ export class GameService {
     }
 
     private resetGameStatus(): void {
-        this.gameStatus.scores = 0;
-        this.gameStatus.gameWon = false;
-        this.gameStatus.gameOver = false;
-    }
-
-    private updateScores( scores: number ): void {
-        if (scores > 0)
-            this.gameStatus.scores += scores;
-        return;
+        this.store.dispatch({
+            type: SET_GAME_STATE, payload: {
+                gameWon: false,
+                gameOver: false,
+                scores: 0,
+            }
+        });
     }
 }
