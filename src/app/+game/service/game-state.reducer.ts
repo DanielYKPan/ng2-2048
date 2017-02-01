@@ -10,12 +10,14 @@ export interface IGameState {
     gameWon: boolean;
     tileSize: number;
     scores: number;
+    highScores: number;
     fontSize: number;
     gameGold: number;
 }
 
 const defaultGameState = {
     scores: 0,
+    highScores: +localStorage.getItem('2048-best') || 0,
     gameOver: false,
     gameWon: false,
     tileSize: 142,

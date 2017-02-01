@@ -34,6 +34,7 @@ import {
 export class GameScoreComponent implements OnInit, OnChanges {
 
     @Input() scores: number;
+    @Input() best: number;
     increasedScores: Array<{value: number, state: string}> = [];
 
     constructor() {

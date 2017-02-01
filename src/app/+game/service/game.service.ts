@@ -38,6 +38,7 @@ export class GameService {
 
         let hasMoved = false; // set a flag to see if any tiles moved
         let scores = 0; // a variable to hold the scores of this move
+        let highScores = this.gameState.highScores; // a variable to hold the highest scores
         let gameWon = false; // a flag to see if a game has achieved gold
         let gameOver = false;// a flag to see if a game has ended
         this.gridService.prepareMove();
@@ -94,6 +95,10 @@ export class GameService {
         // Update the game score after grid checking
         if (scores > 0) {
             scores = this.gameState.scores + scores;
+            if(scores > highScores) {
+                highScores = scores;
+                localStorage.setItem('2048-best', highScores.toString());
+            }
         }else {
             scores = this.gameState.scores;
         }
@@ -114,6 +119,7 @@ export class GameService {
         this.store.dispatch({
             type: SET_GAME_STATE, payload: {
                 scores: scores,
+                highScores: highScores,
                 gameOver: gameOver,
                 gameWon: this.gameState.gameWon || gameWon
             }
