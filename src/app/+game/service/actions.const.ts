@@ -12,4 +12,3 @@ export const ADD_ID = 'ADD_ID';
 export const REMOVE_ID = 'REMOVE_ID';
 
 export const SET_GAME_STATE = 'SET_GAME_STATE';
-export const UPDATE_SCORES = 'UPDATE_SCORES';
